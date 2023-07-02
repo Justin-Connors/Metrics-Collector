@@ -16,9 +16,12 @@ const resolvers = {
       const user = await User.findById(args.userId).select("-email");
       return user;
     },
-    metrics: async (parent, args) => {
-      const result = await Metrics.find();
-      return result;
+    meterics: async (parent, args, context) => {
+      if (context.user) {
+        const result = await Metrics.find({});
+        return result;
+      }
+      throw new AuthenticationError("Not logged in");
     },
   },
   Mutation: {
@@ -52,11 +55,9 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addMetric: async (parent, args, context) => {
+    addMeteric: async (parent, args, context) => {
       if (context.user) {
-        const result = await Metrics.create({
-          ...args,
-        });
+        const result = await Metrics.create(args);
         return result;
       }
       throw new AuthenticationError("Not logged in");

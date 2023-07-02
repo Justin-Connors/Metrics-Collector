@@ -11,7 +11,7 @@ const typeDefs = gql`
   type Metric {
     _id: ID
     name: String
-    value: Int
+    value: [Int]
     timestamp: String
   }
 
@@ -42,7 +42,7 @@ const typeDefs = gql`
       bannerUrl: String
     ): User
     login(email: String!, password: String!): Auth
-    addMetric(name: String!, value: Int!): Metric
+    addMeteric(name: String!, value: [Int]!): Metric
   }
 `;
 
