@@ -11,8 +11,8 @@ const typeDefs = gql`
   type Metric {
     _id: ID
     name: String
-    value: [Int]
-    timestamp: String
+    labels: [Label]
+    values: [Value]
   }
 
   type Auth {
@@ -23,7 +23,8 @@ const typeDefs = gql`
   type Query {
     user: User
     userById(userId: ID): User
-    metrics: [Metric]
+    metric(metricId: ID): Metric
+    metrics: [Metric!]!
   }
 
   type Mutation {
@@ -42,7 +43,11 @@ const typeDefs = gql`
       bannerUrl: String
     ): User
     login(email: String!, password: String!): Auth
-    addMeteric(name: String!, value: [Int]!): Metric
+    addMeteric(
+      name: String!
+      labels: [LabelInput!]!
+      values: [ValueInput!]!
+    ): Metric
   }
 `;
 

@@ -7,16 +7,31 @@ const metricsSchema = new Schema({
     type: String,
     required: true,
   },
-  value: [
+  labels: [
     {
-      type: Number,
-      required: true,
+      key: {
+        type: String,
+        required: true,
+      },
+      value: {
+        type: String,
+        required: true,
+      },
     },
   ],
-  timestamp: {
-    type: Date,
-    default: Date.now,
-  },
+  values: [
+    {
+      value: {
+        type: Number,
+        required: true,
+      },
+      timestamp: {
+        type: Date,
+        default: Date.now,
+        required: true,
+      },
+    },
+  ],
 });
 
 const Metrics = mongoose.model("Metrics", metricsSchema);

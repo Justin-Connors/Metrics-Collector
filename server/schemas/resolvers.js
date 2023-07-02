@@ -16,12 +16,21 @@ const resolvers = {
       const user = await User.findById(args.userId).select("-email");
       return user;
     },
-    meterics: async (parent, args, context) => {
-      if (context.user) {
-        const result = await Metrics.find({});
-        return result;
+    metric: async (_, { id }) => {
+      try {
+        const metric = await Metrics.findById(id);
+        return metric;
+      } catch (err) {
+        console.log("Error in metric Resolver:", err);
       }
-      throw new AuthenticationError("Not logged in");
+    },
+    metrics: async () => {
+      try {
+        const metrics = await Metrics.find();
+        return metrics;
+      } catch (err) {
+        console.log("Error in metrics Resolver:", err);
+      }
     },
   },
   Mutation: {
@@ -55,12 +64,18 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addMeteric: async (parent, args, context) => {
-      if (context.user) {
-        const result = await Metrics.create(args);
-        return result;
+    addMetric: async (_, { name, labels, values }) => {
+      try {
+        const metric = new Metrics({
+          name,
+          labels,
+          values,
+        });
+        await metric.save();
+        return metric;
+      } catch (err) {
+        console.log("Error in addMetric Resolver mutation:", err);
       }
-      throw new AuthenticationError("Not logged in");
     },
   },
 };
