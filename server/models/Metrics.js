@@ -7,10 +7,12 @@ const metricsSchema = new Schema({
     type: String,
     required: true,
   },
-  value: {
-    type: Number,
-    required: true,
-  },
+  value: [
+    {
+      type: Number,
+      required: true,
+    },
+  ],
   timestamp: {
     type: Date,
     default: Date.now,
