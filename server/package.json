@@ -4,7 +4,8 @@
   "description": "metrics-server",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "node server.js",
+    "watch": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -17,12 +18,14 @@
   },
   "homepage": "https://github.com/Justin-Connors/Metrics-Collector#readme",
   "dependencies": {
+    "apollo-server": "^3.12.0",
     "apollo-server-express": "^3.12.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "graphql": "^16.7.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.1",
     "node-cron": "^3.0.2",
     "passport": "^0.6.0",

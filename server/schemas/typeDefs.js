@@ -8,11 +8,21 @@ const typeDefs = gql`
     email: String
   }
 
+  type Label {
+    key: String!
+    value: String!
+  }
+
+  type Value {
+    value: Float!
+    timestamp: String!
+  }
+
   type Metric {
     _id: ID
-    name: String
-    labels: [Label]
-    values: [Value]
+    name: String!
+    labels: [Label!]!
+    values: [Value!]!
   }
 
   type Auth {
@@ -23,8 +33,8 @@ const typeDefs = gql`
   type Query {
     user: User
     userById(userId: ID): User
-    metric(metricId: ID): Metric
-    metrics: [Metric!]!
+    metricById(metricId: ID): Metric
+    metrics: [Metric]!
   }
 
   type Mutation {
@@ -34,20 +44,23 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): Auth
-    updateUser(
-      firstName: String
-      lastName: String
-      email: String
-      bio: String
-      profilePicUrl: String
-      bannerUrl: String
-    ): User
+    updateUser(firstName: String, lastName: String, email: String): User
     login(email: String!, password: String!): Auth
-    addMeteric(
+    addMetric(
       name: String!
       labels: [LabelInput!]!
       values: [ValueInput!]!
     ): Metric
+  }
+
+  input LabelInput {
+    key: String!
+    value: String!
+  }
+
+  input ValueInput {
+    value: Float!
+    timestamp: String!
   }
 `;
 

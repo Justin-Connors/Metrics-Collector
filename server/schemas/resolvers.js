@@ -16,9 +16,9 @@ const resolvers = {
       const user = await User.findById(args.userId).select("-email");
       return user;
     },
-    metric: async (_, { id }) => {
+    metricById: async (parent, args, context) => {
       try {
-        const metric = await Metrics.findById(id);
+        const metric = await Metrics.findById(args.metricId);
         return metric;
       } catch (err) {
         console.log("Error in metric Resolver:", err);
@@ -66,15 +66,10 @@ const resolvers = {
     },
     addMetric: async (_, { name, labels, values }) => {
       try {
-        const metric = new Metrics({
-          name,
-          labels,
-          values,
-        });
-        await metric.save();
+        const metric = await Metrics.create({ name, labels, values });
         return metric;
       } catch (err) {
-        console.log("Error in addMetric Resolver mutation:", err);
+        console.log("Error in addMetric Resolver:", err);
       }
     },
   },
