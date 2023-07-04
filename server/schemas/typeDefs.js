@@ -15,7 +15,6 @@ const typeDefs = gql`
 
   type Value {
     value: Float!
-    timestamp: String!
   }
 
   type Metric {
