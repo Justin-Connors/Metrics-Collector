@@ -59,6 +59,7 @@ const typeDefs = gql`
 
   input ValueInput {
     value: Float!
+    timestamp: String
   }
 `;
 
