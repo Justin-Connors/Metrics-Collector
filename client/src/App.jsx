@@ -20,6 +20,7 @@ import Home from "./pages/Home/index";
 import Signup from "./pages/Signup/index";
 import Login from "./pages/Login/index";
 import Metrics from "./pages/Metrics/index";
+import Auth from "./utils/auth";
 
 // graphql link
 const httpLink = createHttpLink({
