@@ -37,7 +37,7 @@ export const QUERY_METRICS = gql`
 `;
 
 // Query to get a single metric
-export const QUERY_METRIC = gql`
+export const QUERY_METRICS_BY_ID = gql`
   query metric($id: ID!) {
     metric(id: $id) {
       _id
